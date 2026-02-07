@@ -3,58 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual VIP - Guia Completo</title>
+    <title>Instruções de Uso - WhatsConnect API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-body: #000000;
+            --bg-card: #06222A;
+            --primary: #0F9DCB;
+            --accent: #B5FB2A;
+            --border: #0F507A;
+            --text-main: #C6E3DC;
+            --text-dim: #8494A4;
+            --gold: #FFD700;
+            --success: #B5FB2A;
+            --warning: #FFD700;
+            --danger: #ff4d4d;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --dark-bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --border-color: #334155;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f3a 100%);
-            color: var(--text-primary);
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary) 0%, #0a5a7a 100%);
             padding: 2rem 1rem;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.65);
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .header-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 18px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-video {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
             animation: fadeInDown 0.8s ease;
+            color: var(--accent);
+            letter-spacing: 1px;
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             opacity: 0.9;
             animation: fadeInUp 0.8s ease;
+            color: var(--text-main);
         }
 
         /* Container */
@@ -70,23 +101,25 @@
         /* Sidebar Navigation */
         .sidebar {
             position: sticky;
-            top: 120px;
+            top: 140px;
             height: fit-content;
-            background: var(--card-bg);
-            border-radius: 20px;
+            background: var(--bg-card);
+            border-radius: 18px;
             padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.65);
+            border: 1px solid var(--border);
             animation: slideInLeft 0.6s ease;
         }
 
         .sidebar h2 {
-            color: var(--primary-color);
+            color: var(--accent);
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .nav-menu {
@@ -98,7 +131,7 @@
         }
 
         .nav-menu a {
-            color: var(--text-secondary);
+            color: var(--text-dim);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -107,24 +140,37 @@
             border-radius: 10px;
             transition: all 0.3s ease;
             font-size: 0.95rem;
+            border: 1px solid transparent;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(15, 157, 203, 0);
+            }
+            50% {
+                box-shadow: 0 0 0 4px rgba(15, 157, 203, 0.3);
+            }
         }
 
         .nav-menu a:hover {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            background: rgba(15, 157, 203, 0.15);
+            color: var(--accent);
             transform: translateX(10px);
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            border-color: var(--border);
         }
 
         .nav-menu a.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            background: linear-gradient(135deg, rgba(15, 157, 203, 0.2), rgba(181, 251, 42, 0.1));
+            color: var(--accent);
+            border-color: var(--primary);
         }
 
         .nav-menu i {
             font-size: 1.2rem;
             width: 24px;
             text-align: center;
+            color: var(--primary);
         }
 
         /* Main Content */
@@ -133,19 +179,20 @@
         }
 
         .section {
-            background: var(--card-bg);
-            border-radius: 20px;
+            background: var(--bg-card);
+            border-radius: 18px;
             padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.65);
+            border: 1px solid var(--border);
             transition: all 0.3s ease;
-            scroll-margin-top: 100px;
+            scroll-margin-top: 120px;
         }
 
         .section:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 48px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 16px 45px rgba(15, 157, 203, 0.3);
+            border-color: var(--primary);
         }
 
         .section-header {
@@ -154,26 +201,28 @@
             gap: 1rem;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border);
         }
 
         .section-header i {
-            font-size: 2rem;
-            color: var(--primary-color);
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .section-header h2 {
-            font-size: 1.8rem;
-            color: var(--text-primary);
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .section-content {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
         }
 
         .section-content p {
@@ -196,8 +245,14 @@
             content: "▸";
             position: absolute;
             left: 0;
-            color: var(--primary-color);
+            color: var(--accent);
             font-weight: bold;
+        }
+
+        .section-content strong,
+        .section-content b {
+            color: var(--accent);
+            font-weight: 600;
         }
 
         /* Price Cards */
@@ -209,68 +264,333 @@
         }
 
         .price-card {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            background: rgba(0, 0, 0, 0.4);
             padding: 1.5rem;
             border-radius: 15px;
             text-align: center;
-            border: 2px solid var(--border-color);
+            border: 2px solid var(--border);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
         .price-card:hover {
             transform: scale(1.05);
-            border-color: var(--primary-color);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+            border-color: var(--primary);
+            box-shadow: 0 12px 35px rgba(15, 157, 203, 0.4);
+        }
+
+        .price-card:hover::before {
+            transform: scaleX(1);
         }
 
         .price-card h3 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .price-card .price {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: bold;
-            color: var(--success-color);
+            color: var(--accent);
             margin-bottom: 0.5rem;
+        }
+
+        .price-card p {
+            color: var(--text-dim);
+        }
+
+        /* Video Cards */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .video-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 35px rgba(15, 157, 203, 0.4);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            overflow: hidden;
+        }
+
+        .video-thumbnail iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 2rem;
+            pointer-events: none;
+        }
+
+        .video-info {
+            padding: 1.2rem;
+        }
+
+        .video-info h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .video-link:hover {
+            color: var(--accent);
+            gap: 0.8rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .modal-header h2 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--danger);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        /* GRID DE MINIATURAS AJUSTADO */
+        .video-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .video-thumb {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-thumb:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(15, 157, 203, 0.4);
+        }
+
+        .video-thumb-image {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: linear-gradient(135deg, rgba(15, 157, 203, 0.3), rgba(181, 251, 42, 0.2));
+            overflow: hidden;
+        }
+
+        .video-thumb-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-thumb-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .video-thumb-title {
+            padding: 0.8rem;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .btn-open-videos {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-open-videos:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(15, 157, 203, 0.5);
         }
 
         /* Example Boxes */
         .example-box {
-            background: #0f172a;
+            background: rgba(0, 0, 0, 0.6);
             padding: 1.5rem;
             border-radius: 12px;
             margin: 1rem 0;
-            border-left: 4px solid var(--primary-color);
+            border-left: 4px solid var(--primary);
             font-family: 'Courier New', monospace;
         }
 
         .example-box.correct {
-            border-left-color: var(--success-color);
+            border-left-color: var(--success);
+            background: rgba(181, 251, 42, 0.05);
         }
 
         .example-box.incorrect {
-            border-left-color: #ef4444;
+            border-left-color: var(--danger);
+            background: rgba(255, 77, 77, 0.05);
         }
 
         .example-box h4 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 0.8rem;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .example-box.correct h4 {
-            color: var(--success-color);
+            color: var(--success);
         }
 
         .example-box.incorrect h4 {
-            color: #ef4444;
+            color: var(--danger);
         }
 
         .example-box code {
-            color: var(--text-primary);
-            font-size: 1.1rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
             display: block;
             margin: 0.3rem 0;
         }
@@ -287,20 +607,24 @@
         }
 
         .alert i {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-top: 0.2rem;
         }
 
         .alert.warning {
-            background: rgba(245, 158, 11, 0.1);
-            border-left-color: var(--warning-color);
-            color: #fbbf24;
+            background: rgba(255, 215, 0, 0.08);
+            border-left-color: var(--warning);
+            color: var(--gold);
         }
 
         .alert.info {
-            background: rgba(99, 102, 241, 0.1);
-            border-left-color: var(--primary-color);
-            color: #a5b4fc;
+            background: rgba(15, 157, 203, 0.08);
+            border-left-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .alert strong {
+            color: var(--accent);
         }
 
         /* Scroll to Top Button */
@@ -308,29 +632,44 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #000;
             border: none;
             border-radius: 50%;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5);
+            font-size: 1.2rem;
+            box-shadow: 0 8px 25px rgba(15, 157, 203, 0.5);
             transition: all 0.3s ease;
             z-index: 1000;
         }
 
         .scroll-top:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.7);
+            box-shadow: 0 12px 35px rgba(15, 157, 203, 0.7);
         }
 
         .scroll-top.show {
             display: flex;
+        }
+
+        /* Footer */
+        .main-footer {
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        .dev-name {
+            color: var(--accent);
+            font-weight: 600;
         }
 
         /* Animations */
@@ -391,7 +730,7 @@
             }
 
             .header h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .section {
@@ -399,21 +738,30 @@
             }
 
             .price-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .header-video {
+                width: 56px;
+                height: 56px;
+            }
+
+            .video-thumbnails {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 480px) {
             .header h1 {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
 
             .header p {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             .section-header h2 {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
 
             .sidebar {
@@ -421,26 +769,61 @@
             }
 
             .nav-menu a {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 padding: 0.6rem 0.8rem;
+            }
+
+            .header-video {
+                width: 48px;
+                height: 48px;
+            }
+
+            .header-content {
+                gap: 0.5rem;
+            }
+
+            .price-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card .price {
+                font-size: 1.4rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .video-thumbnails {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
-        <h1><i class="fas fa-crown"></i> Manual VIP</h1>
-        <p>Guia completo para utilização do modo VIP</p>
+        <div class="header-wrapper">
+            <div class="header-content">
+                <video class="header-video" autoplay loop muted playsinline preload="auto" src="file:///storage/emulated/0/Tasker/projects_task/projects/whats-connect-api/icons/video-system.mp4"></video>
+                <div>
+                    <h1><i class="fas fa-book"></i> INSTRUÇÕES DE USO</h1>
+                    <p>Guia completo para utilização</p>
+                </div>
+                <video class="header-video" autoplay loop muted playsinline preload="auto" src="file:///storage/emulated/0/Tasker/projects_task/projects/whats-connect-api/icons/video-system.mp4"></video>
+            </div>
+        </div>
     </header>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <h2><i class="fas fa-list"></i> Sumário</h2>
             <nav>
                 <ul class="nav-menu">
+                    <li><a href="#videos" class="nav-link">
+                        <i class="fas fa-video"></i>
+                        <span>Vídeos de Ajuda</span>
+                    </a></li>
                     <li><a href="#como-comprar" class="nav-link">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Como Comprar</span>
@@ -453,10 +836,6 @@
                         <i class="fas fa-dollar-sign"></i>
                         <span>Valores</span>
                     </a></li>
-                    <li><a href="#reembolso" class="nav-link">
-                        <i class="fas fa-undo"></i>
-                        <span>Reembolso</span>
-                    </a></li>
                     <li><a href="#nao-funciona" class="nav-link">
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>Não Funciona?</span>
@@ -465,13 +844,33 @@
                         <i class="fas fa-phone"></i>
                         <span>Cadastro de Número</span>
                     </a></li>
+                    <li><a href="#recomendacoes" class="nav-link">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>Recomendações</span>
+                    </a></li>
+                    <li><a href="#tasker" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <span>Instruções Tasker</span>
+                    </a></li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="content">
-            <!-- Section: Como Comprar -->
+            <section id="videos" class="section">
+                <div class="section-header">
+                    <i class="fas fa-video"></i>
+                    <h2>Vídeos de Ajuda</h2>
+                </div>
+                <div class="section-content">
+                    <p>Assista aos tutoriais em vídeo para facilitar o uso do sistema. Clique no botão abaixo para visualizar todos os vídeos disponíveis:</p>
+                    <button class="btn-open-videos" onclick="openVideoModal()">
+                        <i class="fas fa-play-circle"></i>
+                        Ver Vídeos Tutoriais
+                    </button>
+                </div>
+            </section>
+
             <section id="como-comprar" class="section">
                 <div class="section-header">
                     <i class="fas fa-shopping-cart"></i>
@@ -480,7 +879,7 @@
                 <div class="section-content">
                     <p>O processo de compra do modo VIP é simples e rápido. Siga os passos abaixo:</p>
                     <ul>
-                        <li>Clique no botão "Comprar VIP" disponível na plataforma</li>
+                        <li>Clique no botão <strong>"Comprar VIP"</strong> disponível na plataforma</li>
                         <li>Insira suas informações pessoais (nome completo e número de telefone)</li>
                         <li>Envie os dados para o desenvolvedor</li>
                         <li>Aguarde a confirmação e ativação do seu acesso</li>
@@ -494,7 +893,6 @@
                 </div>
             </section>
 
-            <!-- Section: Duração -->
             <section id="duracao" class="section">
                 <div class="section-header">
                     <i class="fas fa-clock"></i>
@@ -503,14 +901,14 @@
                 <div class="section-content">
                     <p>O acesso VIP pode ser contratado conforme a preferência do usuário. Você pode escolher entre as seguintes opções de período:</p>
                     <ul>
-                        <li><strong>30 dias</strong> - Ideal para testar o serviço</li>
-                        <li><strong>90 dias</strong> - Melhor custo-benefício para uso trimestral</li>
+                        <li><strong>1 mês</strong> - Ideal para testar o serviço</li>
+                        <li><strong>3 meses</strong> - Melhor custo-benefício para uso trimestral</li>
+                        <li><strong>6 meses</strong> - Economia para uso semestral</li>
                         <li><strong>1 ano</strong> - Máxima economia para uso prolongado</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Section: Valores -->
             <section id="valores" class="section">
                 <div class="section-header">
                     <i class="fas fa-dollar-sign"></i>
@@ -520,43 +918,29 @@
                     <p>Os valores do acesso VIP variam de acordo com o período selecionado:</p>
                     <div class="price-grid">
                         <div class="price-card">
-                            <h3><i class="fas fa-calendar-day"></i> 30 Dias</h3>
-                            <div class="price">R$ 50,00</div>
+                            <h3><i class="fas fa-calendar-alt"></i> 1 Mês</h3>
+                            <div class="price">R$ 35,00</div>
                             <p>Plano Mensal</p>
                         </div>
                         <div class="price-card">
-                            <h3><i class="fas fa-calendar-week"></i> 90 Dias</h3>
-                            <div class="price">R$ 120,00</div>
+                            <h3><i class="fas fa-calendar-alt"></i> 3 Meses</h3>
+                            <div class="price">R$ 100,00</div>
                             <p>Plano Trimestral</p>
                         </div>
                         <div class="price-card">
+                            <h3><i class="fas fa-calendar-alt"></i> 6 Meses</h3>
+                            <div class="price">R$ 200,00</div>
+                            <p>Plano Semestral</p>
+                        </div>
+                        <div class="price-card">
                             <h3><i class="fas fa-calendar-alt"></i> 1 Ano</h3>
-                            <div class="price">R$ 450,00</div>
+                            <div class="price">R$ 400,00</div>
                             <p>Plano Anual</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Section: Reembolso -->
-            <section id="reembolso" class="section">
-                <div class="section-header">
-                    <i class="fas fa-undo"></i>
-                    <h2>Tenho direito a reembolso?</h2>
-                </div>
-                <div class="section-content">
-                    <p><strong>Não, o reembolso não será concedido.</strong></p>
-                    <div class="alert warning">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div>
-                            <strong>Atenção:</strong> Esta política existe devido às constantes atualizações do WhatsApp e ao uso de uma API não oficial, que pode exigir ajustes frequentes por parte do desenvolvedor.
-                        </div>
-                    </div>
-                    <p>Recomendamos aguardar as atualizações realizadas regularmente pelo desenvolvedor para garantir o melhor funcionamento do sistema.</p>
-                </div>
-            </section>
-
-            <!-- Section: Não Funciona -->
             <section id="nao-funciona" class="section">
                 <div class="section-header">
                     <i class="fas fa-exclamation-triangle"></i>
@@ -578,7 +962,93 @@
                 </div>
             </section>
 
-            <!-- Section: Cadastro -->
+            <section id="recomendacoes" class="section">
+                <div class="section-header">
+                    <i class="fas fa-thumbs-up"></i>
+                    <h2>Recomendações de Uso</h2>
+                </div>
+                <div class="section-content">
+                    <p>Para evitar bloqueios e garantir o melhor funcionamento do sistema, siga estas recomendações importantes:</p>
+                    
+                    <h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600;">
+                        <i class="fas fa-shield-alt"></i> Evite uso excessivo da API
+                    </h3>
+                    <p>Não utilize a API de forma agressiva ou excessiva para evitar bloqueios do WhatsApp:</p>
+                    <ul>
+                        <li><strong>Limite de mensagens:</strong> Evite enviar grandes volumes de mensagens em curto período de tempo</li>
+                        <li><strong>Exemplo de uso inadequado:</strong> Enviar 50 mensagens em menos de 1 minuto pode sobrecarregar a API e resultar em bloqueio</li>
+                        <li><strong>Intervalos recomendados:</strong> Mantenha um intervalo mínimo de 2-3 segundos entre cada envio de mensagem</li>
+                        <li><strong>Comportamento natural:</strong> Simule um comportamento humano natural ao enviar mensagens</li>
+                    </ul>
+
+                    <div class="alert warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Atenção:</strong> O uso abusivo da API pode resultar em bloqueio temporário ou permanente da sua conta no WhatsApp. Use com moderação e responsabilidade.
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600;">
+                        <i class="fas fa-sync-alt"></i> Mantenha o sistema atualizado
+                    </h3>
+                    <p>É fundamental manter o sistema sempre atualizado para garantir compatibilidade e segurança:</p>
+                    <ul>
+                        <li><strong>Frequência:</strong> Atualize pelo menos uma vez por mês</li>
+                        <li><strong>Método:</strong> Utilize a atualização rápida via GitHub</li>
+                    </ul>
+
+                    <div class="example-box correct">
+                        <h4><i class="fas fa-info-circle"></i> Como atualizar via GitHub:</h4>
+                        <code>1. Acesse o botão de Menu do projeto</code>
+                        <code>2. Clique em "Atualizar via GitHub"</code>
+                        <code>3. Aguarde o processo de atualização ser concluído</code>
+                    </div>
+
+                    <div class="alert info">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Dica:</strong> Atualizações regulares garantem correções de bugs, melhorias de desempenho e compatibilidade com as últimas versões do WhatsApp.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tasker" class="section">
+                <div class="section-header">
+                    <i class="fas fa-cogs"></i>
+                    <h2>Instruções para Tasker</h2>
+                </div>
+                <div class="section-content">
+                    <p>Siga este passo a passo para gerar tarefas de envio no Tasker:</p>
+
+                    <h3 style="color: var(--accent); margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 600;">
+                        <i class="fas fa-tasks"></i> Gerando tarefa de envio
+                    </h3>
+
+                    <div class="example-box correct">
+                        <h4><i class="fas fa-play-circle"></i> Passo a passo:</h4>
+                        <code>1. Execute a tarefa: 008-GERAR_TAREFA_ENVIO [wca]</code>
+                        <code>2. Aguarde a cena ser exibida com o número de telefone</code>
+                        <code>3. Clique no número de telefone exibido na tela</code>
+                        <code>4. Aguarde o download automático da tarefa</code>
+                    </div>
+
+                    <div class="alert info">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Importante:</strong> Após executar a tarefa <code>008-GERAR_TAREFA_ENVIO [wca]</code>, uma cena será exibida mostrando o número de telefone. Basta clicar neste número para iniciar o download automático da tarefa de envio.
+                        </div>
+                    </div>
+
+                    <div class="alert warning">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Aguarde:</strong> O processo de download da tarefa é automático. Aguarde até que seja concluído antes de prosseguir.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section id="cadastro" class="section">
                 <div class="section-header">
                     <i class="fas fa-phone"></i>
@@ -597,14 +1067,22 @@
                     <ul>
                         <li><strong>Código do país</strong> (Brasil: 55)</li>
                         <li><strong>DDD</strong> (2 dígitos)</li>
-                        <li><strong>Número do celular</strong> com nove dígitos</li>
+                        <li><strong>Número do celular</strong> (8 ou 9 dígitos)</li>
                     </ul>
+
+                    <div class="alert info">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Importante:</strong> O formato padrão é com <strong>12 dígitos</strong> (sem o nono dígito). Porém, em alguns estados, pode ser necessário utilizar <strong>13 dígitos</strong> (com o nono dígito) para o correto funcionamento na API do WhatsApp.
+                        </div>
+                    </div>
 
                     <div class="example-box correct">
                         <h4><i class="fas fa-check-circle"></i> Exemplos CORRETOS:</h4>
-                        <code>5511999999999</code>
-                        <code>5581988887777</code>
-                        <code>5521987654321</code>
+                        <code>5511999999999 (13 dígitos - com nono dígito)</code>
+                        <code>5581988887777 (13 dígitos - com nono dígito)</code>
+                        <code>558188887777 (12 dígitos - sem nono dígito)</code>
+                        <code>5521987654321 (13 dígitos - com nono dígito)</code>
                     </div>
 
                     <div class="example-box incorrect">
@@ -612,12 +1090,13 @@
                         <code>+55 11 99999-9999 ❌</code>
                         <code>(11) 99999-9999 ❌</code>
                         <code>11 9 9999-9999 ❌</code>
+                        <code>55 11 99999-9999 ❌</code>
                     </div>
 
-                    <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem;">
-                        <i class="fas fa-map-marker-alt"></i> Estados com 9º dígito obrigatório:
+                    <h3 style="color: var(--accent); margin-top: 2rem; margin-bottom: 1rem; font-weight: 600;">
+                        <i class="fas fa-map-marker-alt"></i> Estados onde o nono dígito pode ser necessário:
                     </h3>
-                    <p>Exemplos de estados onde o uso do nono dígito é obrigatório e indispensável para o correto funcionamento em APIs não oficiais:</p>
+                    <p>Em alguns estados, caso a instalação com 12 dígitos não funcione, tente adicionar o nono dígito (totalizando 13 dígitos):</p>
                     <ul>
                         <li><strong>São Paulo (SP)</strong> - DDD: 11, 12, 13, 14, 15, 16, 17, 18, 19</li>
                         <li><strong>Rio de Janeiro (RJ)</strong> - DDD: 21, 22, 24</li>
@@ -626,10 +1105,17 @@
                         <li><strong>Paraná (PR)</strong> - DDD: 41, 42, 43, 44, 45, 46</li>
                     </ul>
 
+                    <div class="alert warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Dica:</strong> O formato padrão é 12 dígitos. Se houver problemas na conexão ou validação, tente utilizar 13 dígitos (adicionando o nono dígito após o DDD).
+                        </div>
+                    </div>
+
                     <div class="alert info">
                         <i class="fas fa-shield-alt"></i>
                         <div>
-                            <strong>Importante:</strong> A utilização do formato correto evita falhas no cadastro, erros de conexão e problemas na validação do número junto aos serviços integrados.
+                            <strong>Importante:</strong> A utilização do formato correto evita falhas no cadastro, erros de conexão e problemas na validação do número junto aos serviços integrados da API do WhatsApp.
                         </div>
                     </div>
                 </div>
@@ -637,74 +1123,257 @@
         </main>
     </div>
 
-    <!-- Scroll to Top Button -->
+    <footer class="main-footer">
+        Desenvolvedor: <span class="dev-name">Andredye Oliveira Melo</span>
+    </footer>
+
     <button class="scroll-top" id="scrollTop">
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-video"></i> Vídeos Tutoriais</h2>
+                <button class="modal-close" onclick="closeVideoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="videoThumbnails" class="video-thumbnails">
+                </div>
+        </div>
+    </div>
+
+    <div id="videoPlayerModal" class="modal">
+        <div class="modal-content" style="max-width: 1000px;">
+            <div class="modal-header">
+                <h2 id="videoPlayerTitle"><i class="fas fa-play-circle"></i> Assistindo vídeo</h2>
+                <button class="modal-close" onclick="closeVideoPlayer()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="videoPlayerContainer" style="position: relative; padding-top: 56.25%; background: #000; border-radius: 12px; overflow: hidden;">
+                </div>
+        </div>
+    </div>
+
     <script>
-        // Smooth scrolling for navigation links
+        // Função para Logout ao remover dispositivo
+        async function logoutDispositivo(idDispositivo) {
+            try {
+                await fetch(`http://localhost:3000/app/logout?id=${idDispositivo}`, { method: 'GET' });
+                console.log("Logout concluído para o dispositivo: " + idDispositivo);
+            } catch (error) {
+                console.error("Erro ao processar logout:", error);
+            }
+        }
+
+        // ============================================
+        // CONFIGURAÇÃO DE VÍDEOS
+        // ============================================
+        const videosConfig = `
+Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770493599&ei=P0KHafChAsCdobIPwu3G8AE&ip=177.37.233.218&id=o-APUKAaPeg7UzjwnLr2p4QDp4o47ZwENm5XoxmKic2eUV&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=1287&met=1770471999%2C&mh=QE&mm=31%2C29&mn=sn-cgpn5oxu-wqvs%2Csn-gpv7yn7l&ms=au%2Crdu&mv=m&mvi=4&pcm2cms=yes&pl=24&rms=au%2Cau&gcr=br&initcwndbps=2013750&bui=AW-iu_q3wh5wsRvqu2yFtlslFksw4jRxX1jzrIoGmlkJXgxXtEoIdxKz7hI2YzQ84IgYfljNFrBYF7TJ&spc=q5xjPB1IUfyQeU-SpREy&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=28447896&ratebypass=yes&dur=314.003&lmt=1741655950854447&mt=1770470990&fvip=2&fexp=51514994%2C51552689%2C51565115%2C51565682%2C51580968&c=ANDROID_VR&txp=4538534&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cgcr%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJEij0EwRQIhAPQsP7DOoOymwhWw2HaX8XYcpjHuyn9MJFnKv8QbTeIOAiAEyoccCxAMuGdNeuSJGhCDGCUEdYtp1Wx6bIMpDP0Muw%3D%3D&lsparams=cps%2Cmet%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRgIhAI88JzFO7Gpt0JN1O9uYVuSMPUbWVRgCUq0VuvUOaIIdAiEA0sIPUiyItXVc3pN-tTp1x8jqVU-wRrz3ZbXE8lymoYI%3D
+
+
+
+,Video2|https://rr4---sn-cgpn5oxu-wqvl.googlevideo.com/videoplayback?expire=1770495217&ei=kUiHadKCKbWqobIPxsik-Qs&ip=177.37.233.218&id=o-ANtE5pWFAACeNNKhw5xQpcQMxdYc5eYSQZZTgxj5SHIZ&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=608&met=1770473617%2C&mh=sx&mm=31%2C29&mn=sn-cgpn5oxu-wqvl%2Csn-gpv7yne6&ms=au%2Crdu&mv=m&mvi=4&pl=24&rms=au%2Cau&pcm2=no&initcwndbps=2171250&bui=AW-iu_rnFwG3Qy4LRYwc7jNGetvSJOgAZJbZqJFKAc0-7OjEwkgtOaRmDu938F13Va-ZHz_m0KRxCKkA&spc=q5xjPG73X6U7AmnIPe1Z&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=20396448&ratebypass=yes&dur=257.369&lmt=1770057663288195&mt=1770473386&fvip=2&fexp=51552689%2C51565116%2C51565681%2C51580968&c=ANDROID_VR&txp=6209224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cpcm2%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJEij0EwRgIhAJCJlziBdJfRHGaqVI09cNILtXouQ3Ju2iIshcxyEVeVAiEA0-ISQiEXxOSFjhoS7K9zoZKV4gzsH_M_rUQY7yDN3to%3D&lsparams=cps%2Cmet%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRQIhAO_XMy0Q2DWG1qOH6LZCYqpwZmcWgV1DSTRAEt9CSzqGAiACjCWDHd2o1J2zV_yY1BMIe4XlKCuEno06S-gq8-1mWw%3D%3D
+
+
+`.trim();
+
+        const DEFAULT_THUMBNAIL_PATH = '/storage/emulated/0/Download/Telegram/WCA_Logo.png';
+
+        function getVideoIdentifier(url) {
+            const youtubeRegExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(youtubeRegExp);
+            if (match && match[2].length === 11) {
+                return { type: 'youtube', id: match[2] };
+            }
+            return { type: 'direct', url: url };
+        }
+
+        // FUNÇÃO AJUSTADA PARA GERAR MINIATURAS PEQUENAS NO MODAL
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('videoThumbnails');
+            
+            container.innerHTML = '';
+
+            if (!videosConfig || videosConfig.trim() === '') {
+                container.innerHTML = '<p style="color: var(--text-dim); font-style: italic; text-align: center; padding: 2rem;">Nenhum vídeo disponível no momento.</p>';
+                modal.classList.add('show');
+                return;
+            }
+
+            const videos = videosConfig.split(',').map(v => v.trim()).filter(v => v);
+            
+            videos.forEach(videoEntry => {
+                const parts = videoEntry.split('|');
+                if (parts.length < 2) return;
+
+                const title = parts[0].trim();
+                const url = parts[1].trim();
+                const videoIdentifier = getVideoIdentifier(url);
+
+                if (videoIdentifier.type === 'youtube' && videoIdentifier.id) {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'video-thumb';
+                    thumb.onclick = () => openVideoPlayer(title, videoIdentifier.id, 'youtube');
+
+                    thumb.innerHTML = `
+                        <div class="video-thumb-image">
+                            <img src="https://img.youtube.com/vi/${videoIdentifier.id}/hqdefault.jpg" alt="${title}">
+                            <div class="video-thumb-play">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-thumb-title">${title}</div>
+                    `;
+                    container.appendChild(thumb);
+                } else if (videoIdentifier.type === 'direct' && videoIdentifier.url) {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'video-thumb';
+                    thumb.onclick = () => openVideoPlayer(title, videoIdentifier.url, 'direct');
+
+                    const thumbnailUrl = parts.length > 2 ? parts[2].trim() : '';
+                    let thumbImageContent = '';
+
+                    if (thumbnailUrl) {
+                        thumbImageContent = `
+                            <img src="${thumbnailUrl}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="video-thumb-play">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        `;
+                    } else {
+                        thumbImageContent = `
+                            <img src="${DEFAULT_THUMBNAIL_PATH}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="video-thumb-play">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        `;
+                    }
+
+                    thumb.innerHTML = `
+                        <div class="video-thumb-image">
+                            ${thumbImageContent}
+                        </div>
+                        <div class="video-thumb-title">${title}</div>
+                    `;
+                    container.appendChild(thumb);
+                }
+            });
+
+            modal.classList.add('show');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.remove('show');
+        }
+
+        function openVideoPlayer(title, identifier, type) {
+            const modal = document.getElementById('videoPlayerModal');
+            const titleEl = document.getElementById('videoPlayerTitle');
+            const container = document.getElementById('videoPlayerContainer');
+            
+            titleEl.innerHTML = `<i class="fas fa-play-circle"></i> ${title}`;
+            
+            container.innerHTML = ''; // Clear previous content
+
+            if (type === 'youtube') {
+                const iframeElement = document.createElement('iframe');
+                iframeElement.style.cssText = "position: absolute; top: 0; left: 0; width: 100%; height: 100%;";
+                iframeElement.src = `https://www.youtube.com/embed/${identifier}?autoplay=1`;
+                iframeElement.frameBorder = "0"; // Correct DOM property for frameborder
+                iframeElement.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframeElement.allowFullscreen = true; // Correct DOM property for allowfullscreen
+                container.appendChild(iframeElement);
+            } else if (type === 'direct') {
+                const videoElement = document.createElement('video');
+                videoElement.style.cssText = "position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black;";
+                videoElement.src = identifier;
+                videoElement.controls = true;
+                videoElement.controlsList = "nodownload";
+                videoElement.autoplay = true;
+                videoElement.muted = true; // Start muted
+                videoElement.playsinline = true;
+                videoElement.innerHTML = "Seu navegador não suporta a tag de vídeo.";
+                container.appendChild(videoElement);
+
+                // Attempt to unmute after a short delay (e.g., 2 seconds)
+                setTimeout(() => {
+                    if (videoElement && videoElement.muted) {
+                        videoElement.muted = false;
+                        // Play if it was paused due to unmuting policy
+                        if (videoElement.paused) {
+                            videoElement.play().catch(error => {
+                                console.error("Error attempting to autoplay after unmute:", error);
+                            });
+                        }
+                    }
+                }, 200);
+            }
+            
+            closeVideoModal();
+            modal.classList.add('show');
+        }
+
+        function closeVideoPlayer() {
+            const videoPlayerModal = document.getElementById('videoPlayerModal');
+            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
+            videoPlayerContainer.innerHTML = ''; // Stop video playback
+            videoPlayerModal.classList.remove('show'); // Hide player modal
+
+            // Show the video thumbnails modal
+            const videoModal = document.getElementById('videoModal');
+            videoModal.classList.add('show');
+        }
+
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('videoModal')) closeVideoModal();
+            if (event.target === document.getElementById('videoPlayerModal')) closeVideoPlayer();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeVideoModal();
+                closeVideoPlayer();
+            }
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
-                
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
-                // Update active state
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             });
         });
 
-        // Scroll to top button functionality
         const scrollTopBtn = document.getElementById('scrollTop');
-
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('show');
-            } else {
-                scrollTopBtn.classList.remove('show');
-            }
+            if (window.pageYOffset > 300) scrollTopBtn.classList.add('show');
+            else scrollTopBtn.classList.remove('show');
         });
-
         scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Highlight active section on scroll
         window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('.section');
-            
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 150)) {
-                    current = section.getAttribute('id');
-                }
+                if (pageYOffset >= (sectionTop - 150)) current = section.getAttribute('id');
             });
-
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
+                if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
             });
         });
-
-        // Add entrance animations on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -713,7 +1382,7 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.section').forEach(section => {
             section.style.opacity = '0';
