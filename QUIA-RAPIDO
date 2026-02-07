@@ -1159,10 +1159,12 @@
 
     <script>
         // Função para Logout ao remover dispositivo
-        async function logoutDispositivo(idDispositivo) {
+        async function logoutDevice(deviceId) {
             try {
-                await fetch(`http://localhost:3000/app/logout?id=${idDispositivo}`, { method: 'GET' });
-                console.log("Logout concluído para o dispositivo: " + idDispositivo);
+                await fetch(`http://localhost:3000/app/logout?id=${deviceId}`, {
+                    method: 'GET'
+                });
+                console.log("Logout concluído para o dispositivo: " + deviceId);
             } catch (error) {
                 console.error("Erro ao processar logout:", error);
             }
@@ -1171,7 +1173,7 @@
         // ============================================
         // CONFIGURAÇÃO DE VÍDEOS
         // ============================================
-        const videosConfig = `
+        const videoConfig = `
 Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770493599&ei=P0KHafChAsCdobIPwu3G8AE&ip=177.37.233.218&id=o-APUKAaPeg7UzjwnLr2p4QDp4o47ZwENm5XoxmKic2eUV&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=1287&met=1770471999%2C&mh=QE&mm=31%2C29&mn=sn-cgpn5oxu-wqvs%2Csn-gpv7yn7l&ms=au%2Crdu&mv=m&mvi=4&pcm2cms=yes&pl=24&rms=au%2Cau&gcr=br&initcwndbps=2013750&bui=AW-iu_q3wh5wsRvqu2yFtlslFksw4jRxX1jzrIoGmlkJXgxXtEoIdxKz7hI2YzQ84IgYfljNFrBYF7TJ&spc=q5xjPB1IUfyQeU-SpREy&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=28447896&ratebypass=yes&dur=314.003&lmt=1741655950854447&mt=1770470990&fvip=2&fexp=51514994%2C51552689%2C51565115%2C51565682%2C51580968&c=ANDROID_VR&txp=4538534&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cgcr%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJEij0EwRQIhAPQsP7DOoOymwhWw2HaX8XYcpjHuyn9MJFnKv8QbTeIOAiAEyoccCxAMuGdNeuSJGhCDGCUEdYtp1Wx6bIMpDP0Muw%3D%3D&lsparams=cps%2Cmet%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRgIhAI88JzFO7Gpt0JN1O9uYVuSMPUbWVRgCUq0VuvUOaIIdAiEA0sIPUiyItXVc3pN-tTp1x8jqVU-wRrz3ZbXE8lymoYI%3D
 
 
@@ -1187,40 +1189,46 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
             const youtubeRegExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
             const match = url.match(youtubeRegExp);
             if (match && match[2].length === 11) {
-                return { type: 'youtube', id: match[2] };
+                return {
+                    type: 'youtube',
+                    id: match[2]
+                };
             }
-            return { type: 'direct', url: url };
+            return {
+                type: 'direct',
+                url: url
+            };
         }
 
         // FUNÇÃO AJUSTADA PARA GERAR MINIATURAS PEQUENAS NO MODAL
         function openVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const container = document.getElementById('videoThumbnails');
-            
-            container.innerHTML = '';
+            const videoListModal = document.getElementById('videoModal');
+            const thumbnailsContainer = document.getElementById('videoThumbnails');
 
-            if (!videosConfig || videosConfig.trim() === '') {
-                container.innerHTML = '<p style="color: var(--text-dim); font-style: italic; text-align: center; padding: 2rem;">Nenhum vídeo disponível no momento.</p>';
-                modal.classList.add('show');
+            thumbnailsContainer.innerHTML = '';
+
+            if (!videoConfig || videoConfig.trim() === '') {
+                thumbnailsContainer.innerHTML = '<p style="color: var(--text-dim); font-style: italic; text-align: center; padding: 2rem;">Nenhum vídeo disponível no momento.</p>';
+                videoListModal.classList.add('show');
                 return;
             }
 
-            const videos = videosConfig.split(',').map(v => v.trim()).filter(v => v);
-            
-            videos.forEach(videoEntry => {
-                const parts = videoEntry.split('|');
-                if (parts.length < 2) return;
+            const videoEntries = videoConfig.split(',').map(v => v.trim()).filter(v => v);
 
-                const title = parts[0].trim();
-                const url = parts[1].trim();
+            videoEntries.forEach(videoEntry => {
+                const videoParts = videoEntry.split('|');
+                if (videoParts.length < 2) return;
+
+                const title = videoParts[0].trim();
+                const url = videoParts[1].trim();
                 const videoIdentifier = getVideoIdentifier(url);
 
                 if (videoIdentifier.type === 'youtube' && videoIdentifier.id) {
-                    const thumb = document.createElement('div');
-                    thumb.className = 'video-thumb';
-                    thumb.onclick = () => openVideoPlayer(title, videoIdentifier.id, 'youtube');
+                    const thumbnailElement = document.createElement('div');
+                    thumbnailElement.className = 'video-thumb';
+                    thumbnailElement.onclick = () => openVideoPlayer(title, videoIdentifier.id, 'youtube');
 
-                    thumb.innerHTML = `
+                    thumbnailElement.innerHTML = `
                         <div class="video-thumb-image">
                             <img src="https://img.youtube.com/vi/${videoIdentifier.id}/hqdefault.jpg" alt="${title}">
                             <div class="video-thumb-play">
@@ -1229,24 +1237,24 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
                         </div>
                         <div class="video-thumb-title">${title}</div>
                     `;
-                    container.appendChild(thumb);
+                    thumbnailsContainer.appendChild(thumbnailElement);
                 } else if (videoIdentifier.type === 'direct' && videoIdentifier.url) {
-                    const thumb = document.createElement('div');
-                    thumb.className = 'video-thumb';
-                    thumb.onclick = () => openVideoPlayer(title, videoIdentifier.url, 'direct');
+                    const thumbnailElement = document.createElement('div');
+                    thumbnailElement.className = 'video-thumb';
+                    thumbnailElement.onclick = () => openVideoPlayer(title, videoIdentifier.url, 'direct');
 
-                    const thumbnailUrl = parts.length > 2 ? parts[2].trim() : '';
-                    let thumbImageContent = '';
+                    const thumbnailUrl = videoParts.length > 2 ? videoParts[2].trim() : '';
+                    let thumbnailImageHTML = '';
 
                     if (thumbnailUrl) {
-                        thumbImageContent = `
+                        thumbnailImageHTML = `
                             <img src="${thumbnailUrl}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
                             <div class="video-thumb-play">
                                 <i class="fas fa-play"></i>
                             </div>
                         `;
                     } else {
-                        thumbImageContent = `
+                        thumbnailImageHTML = `
                             <img src="${DEFAULT_THUMBNAIL_PATH}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
                             <div class="video-thumb-play">
                                 <i class="fas fa-play"></i>
@@ -1254,17 +1262,17 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
                         `;
                     }
 
-                    thumb.innerHTML = `
+                    thumbnailElement.innerHTML = `
                         <div class="video-thumb-image">
-                            ${thumbImageContent}
+                            ${thumbnailImageHTML}
                         </div>
                         <div class="video-thumb-title">${title}</div>
                     `;
-                    container.appendChild(thumb);
+                    thumbnailsContainer.appendChild(thumbnailElement);
                 }
             });
 
-            modal.classList.add('show');
+            videoListModal.classList.add('show');
         }
 
         function closeVideoModal() {
@@ -1272,13 +1280,13 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
         }
 
         function openVideoPlayer(title, identifier, type) {
-            const modal = document.getElementById('videoPlayerModal');
-            const titleEl = document.getElementById('videoPlayerTitle');
-            const container = document.getElementById('videoPlayerContainer');
-            
-            titleEl.innerHTML = `<i class="fas fa-play-circle"></i> ${title}`;
-            
-            container.innerHTML = ''; // Clear previous content
+            const playerModal = document.getElementById('videoPlayerModal');
+            const titleElement = document.getElementById('videoPlayerTitle');
+            const playerContainer = document.getElementById('videoPlayerContainer');
+
+            titleElement.innerHTML = `<i class="fas fa-play-circle"></i> ${title}`;
+
+            playerContainer.innerHTML = ''; // Clear previous content
 
             if (type === 'youtube') {
                 const iframeElement = document.createElement('iframe');
@@ -1287,7 +1295,7 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
                 iframeElement.frameBorder = "0"; // Correct DOM property for frameborder
                 iframeElement.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
                 iframeElement.allowFullscreen = true; // Correct DOM property for allowfullscreen
-                container.appendChild(iframeElement);
+                playerContainer.appendChild(iframeElement);
             } else if (type === 'direct') {
                 const videoElement = document.createElement('video');
                 videoElement.style.cssText = "position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black;";
@@ -1297,8 +1305,23 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
                 videoElement.autoplay = true;
                 videoElement.muted = true; // Start muted
                 videoElement.playsinline = true;
+                videoElement.setAttribute('allowfullscreen', 'true'); // Add for WebView compatibility attempt
                 videoElement.innerHTML = "Seu navegador não suporta a tag de vídeo.";
-                container.appendChild(videoElement);
+                playerContainer.appendChild(videoElement);
+
+                // Create and add the button
+                const watchOutsideButton = document.createElement('button');
+                watchOutsideButton.innerText = 'Assistir fora do Tasker';
+                watchOutsideButton.className = 'btn-open-videos btn-external-video'; // Unique class for removal
+                watchOutsideButton.style.cssText = "margin-top: 1rem; display: block; margin-left: auto; margin-right: auto;";
+                watchOutsideButton.onclick = function() {
+                    ///alert(identifier)
+                    
+                    setLocal("video_link",identifier);
+                    destroyScene('Wca Teste');
+                };
+                // Append button to the modal content, after the video container
+                playerContainer.parentNode.appendChild(watchOutsideButton);
 
                 // Attempt to unmute after a short delay (e.g., 2 seconds)
                 setTimeout(() => {
@@ -1313,20 +1336,27 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
                     }
                 }, 200);
             }
-            
+
             closeVideoModal();
-            modal.classList.add('show');
+            playerModal.classList.add('show');
         }
 
         function closeVideoPlayer() {
-            const videoPlayerModal = document.getElementById('videoPlayerModal');
-            const videoPlayerContainer = document.getElementById('videoPlayerContainer');
-            videoPlayerContainer.innerHTML = ''; // Stop video playback
-            videoPlayerModal.classList.remove('show'); // Hide player modal
+            const playerModal = document.getElementById('videoPlayerModal');
+            const playerContainer = document.getElementById('videoPlayerContainer');
+            playerContainer.innerHTML = ''; // Stop video playback
+
+            // Find and remove the dynamically added button
+            const externalButton = playerModal.querySelector('.btn-external-video');
+            if (externalButton) {
+                externalButton.remove();
+            }
+
+            playerModal.classList.remove('show'); // Hide player modal
 
             // Show the video thumbnails modal
-            const videoModal = document.getElementById('videoModal');
-            videoModal.classList.add('show');
+            const videoListModal = document.getElementById('videoModal');
+            videoListModal.classList.add('show');
         }
 
         window.onclick = function(event) {
@@ -1342,53 +1372,71 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
         });
 
         // Smooth scrolling
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
+        document.querySelectorAll('.nav-link').forEach(navLink => {
+            navLink.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                document.querySelectorAll('.nav-link').forEach(linkToDeactivate => {
+                    linkToDeactivate.classList.remove('active');
+                });
                 this.classList.add('active');
             });
         });
 
-        const scrollTopBtn = document.getElementById('scrollTop');
+        const scrollTopButton = document.getElementById('scrollTop');
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) scrollTopBtn.classList.add('show');
-            else scrollTopBtn.classList.remove('show');
+            if (window.pageYOffset > 300) {
+                scrollTopButton.classList.add('show');
+            } else {
+                scrollTopButton.classList.remove('show');
+            }
         });
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         window.addEventListener('scroll', () => {
-            let current = '';
+            let currentSectionId = '';
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= (sectionTop - 150)) current = section.getAttribute('id');
+                if (pageYOffset >= (sectionTop - 150)) {
+                    currentSectionId = section.getAttribute('id');
+                }
             });
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(navLink => {
+                navLink.classList.remove('active');
+                if (navLink.getAttribute('href') === `#${currentSectionId}`) {
+                    navLink.classList.add('active');
+                }
             });
         });
 
-        const observer = new IntersectionObserver((entries) => {
+        const intersectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
         document.querySelectorAll('.section').forEach(section => {
             section.style.opacity = '0';
             section.style.transform = 'translateY(30px)';
             section.style.transition = 'all 0.6s ease';
-            observer.observe(section);
+            intersectionObserver.observe(section);
         });
     </script>
 </body>
