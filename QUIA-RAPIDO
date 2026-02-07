@@ -502,7 +502,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Changed from cover to contain to show full image */
         }
 
         .video-thumb-play {
@@ -1174,7 +1174,7 @@
         // CONFIGURAÇÃO DE VÍDEOS
         // ============================================
         const videoConfig = `
-Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770493599&ei=P0KHafChAsCdobIPwu3G8AE&ip=177.37.233.218&id=o-APUKAaPeg7UzjwnLr2p4QDp4o47ZwENm5XoxmKic2eUV&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=1287&met=1770471999%2C&mh=QE&mm=31%2C29&mn=sn-cgpn5oxu-wqvs%2Csn-gpv7yn7l&ms=au%2Crdu&mv=m&mvi=4&pcm2cms=yes&pl=24&rms=au%2Cau&gcr=br&initcwndbps=2013750&bui=AW-iu_q3wh5wsRvqu2yFtlslFksw4jRxX1jzrIoGmlkJXgxXtEoIdxKz7hI2YzQ84IgYfljNFrBYF7TJ&spc=q5xjPB1IUfyQeU-SpREy&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=28447896&ratebypass=yes&dur=314.003&lmt=1741655950854447&mt=1770470990&fvip=2&fexp=51514994%2C51552689%2C51565115%2C51565682%2C51580968&c=ANDROID_VR&txp=4538534&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cgcr%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJEij0EwRQIhAPQsP7DOoOymwhWw2HaX8XYcpjHuyn9MJFnKv8QbTeIOAiAEyoccCxAMuGdNeuSJGhCDGCUEdYtp1Wx6bIMpDP0Muw%3D%3D&lsparams=cps%2Cmet%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRgIhAI88JzFO7Gpt0JN1O9uYVuSMPUbWVRgCUq0VuvUOaIIdAiEA0sIPUiyItXVc3pN-tTp1x8jqVU-wRrz3ZbXE8lymoYI%3D
+Vídeo de instalação do Whats Connect API |https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770493599&ei=P0KHafChAsCdobIPwu3G8AE&ip=177.37.233.218&id=o-APUKAaPeg7UzjwnLr2p4QDp4o47ZwENm5XoxmKic2eUV&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&cps=1287&met=1770471999%2C&mh=QE&mm=31%2C29&mn=sn-cgpn5oxu-wqvs%2Csn-gpv7yn7l&ms=au%2Crdu&mv=m&mvi=4&pcm2cms=yes&pl=24&rms=au%2Cau&gcr=br&initcwndbps=2013750&bui=AW-iu_q3wh5wsRvqu2yFtlslFksw4jRxX1jzrIoGmlkJXgxXtEoIdxKz7hI2YzQ84IgYfljNFrBYF7TJ&spc=q5xjPB1IUfyQeU-SpREy&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=28447896&ratebypass=yes&dur=314.003&lmt=1741655950854447&mt=1770470990&fvip=2&fexp=51514994%2C51552689%2C51565115%2C51565682%2C51580968&c=ANDROID_VR&txp=4538534&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cgcr%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJEij0EwRQIhAPQsP7DOoOymwhWw2HaX8XYcpjHuyn9MJFnKv8QbTeIOAiAEyoccCxAMuGdNeuSJGhCDGCUEdYtp1Wx6bIMpDP0Muw%3D%3D&lsparams=cps%2Cmet%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRgIhAI88JzFO7Gpt0JN1O9uYVuSMPUbWVRgCUq0VuvUOaIIdAiEA0sIPUiyItXVc3pN-tTp1x8jqVU-wRrz3ZbXE8lymoYI%3D
 
 
 
@@ -1183,7 +1183,7 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
 
 `.trim();
 
-        const DEFAULT_THUMBNAIL_PATH = '/storage/emulated/0/Download/Telegram/WCA_Logo.png';
+        const DEFAULT_THUMBNAIL_PATH = '/storage/emulated/0/Tasker/projects_task/projects/whats-connect-api/icons/icon-system.png';
 
         function getVideoIdentifier(url) {
             const youtubeRegExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -1248,14 +1248,14 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
 
                     if (thumbnailUrl) {
                         thumbnailImageHTML = `
-                            <img src="${thumbnailUrl}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="${thumbnailUrl}" alt="${title}" style="width: 100%; height: 100%; object-fit: contain;">
                             <div class="video-thumb-play">
                                 <i class="fas fa-play"></i>
                             </div>
                         `;
                     } else {
                         thumbnailImageHTML = `
-                            <img src="${DEFAULT_THUMBNAIL_PATH}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="${DEFAULT_THUMBNAIL_PATH}" alt="${title}" style="width: 100%; height: 100%; object-fit: contain;">
                             <div class="video-thumb-play">
                                 <i class="fas fa-play"></i>
                             </div>
@@ -1318,7 +1318,7 @@ Video 1|https://rr4---sn-cgpn5oxu-wqvs.googlevideo.com/videoplayback?expire=1770
                     ///alert(identifier)
                     
                     setLocal("video_link",identifier);
-                    destroyScene('Wca Teste');
+                    destroyScene('001-PAINEL_WHATS_API [wca]');
                 };
                 // Append button to the modal content, after the video container
                 playerContainer.parentNode.appendChild(watchOutsideButton);
