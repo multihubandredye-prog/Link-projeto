@@ -4,15 +4,4 @@ Novidades:
 - Novos recursos adicionados
 - Interface otimizada
 - Informações adicionais sobre variáveis adicionado na tela de manual de instalações
-Novidades:
-- Melhorias de performance
-- Correção de bugs
-- Novos recursos adicionados
-- Interface otimizada
-- Informações adicionais sobre variáveis adicionado na tela de manual de instalações
-Novidades:
-- Melhorias de performance
-- Correção de bugs
-- Novos recursos adicionados
-- Interface otimizada
-- Informações adicionais sobre variáveis adicionado na tela de manual de instalações
+- Correção da variável \%poll_response_votes_json agora ela só retorna realmente a resposta única clicada na enquete
