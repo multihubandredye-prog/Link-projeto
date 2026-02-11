@@ -1,7 +1,12 @@
 Novidades:
-- Melhorias de performance
-- Correção de bugs
-- Novos recursos adicionados
-- Interface otimizada
-- Informações adicionais sobre variáveis adicionado na tela de manual de instalações
-- Correção da variável \%poll_response_votes_json agora ela só retorna realmente a resposta única clicada na enquete
+➪ Melhorias de performance (15/01/2026)
+
+➪ Correção de bugs (15/01/2026)
+
+➪ Novos recursos adicionados (22/01/2026)
+
+➪ Interface otimizada (22/01/2026)
+
+➪ Informações adicionais sobre variáveis adicionado na tela de manual de instalações (29/01/2026)
+
+➪ Melhorias de performance no projeto e reset automático desconecta todas conexões dos usuários sem necessidade de desconexão manual (11/02/2026)
