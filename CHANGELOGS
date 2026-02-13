@@ -1,15 +1,9 @@
 Últimas novidades:
 
-➪ Melhorias de performance
-
-➪ Correção de bugs
-
-➪ Novos recursos adicionados
-
-➪ Interface otimizada
-
-➪ Informações adicionais sobre variáveis adicionado na tela de manual de instalações
-
 ➪ Melhorias de performance no projeto e reset automático desconecta todas conexões dos usuários sem necessidade de desconexão manual
 
 ➪ Adicionado perfis para identificar quando o Termux está inativo e reiniciar a API quando o celular é reiniciado
+
+➪ Adicionada na atualização do projeto via GitHub.
+
+➪ Melhoria no design da tela de instruções. Obrigado, Alécio Lopes.
